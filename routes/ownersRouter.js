@@ -2,9 +2,6 @@ const express = require('express');
 const router = express.Router();
 const ownerModel = require('../models/owners-model');
 
-router.get('/', function (req, res) {
-    res.send("hey its working");
-});
 
 if (process.env.NODE_ENV === "development") {
     console.log(process.env.NODE_ENV);
@@ -25,5 +22,10 @@ if (process.env.NODE_ENV === "development") {
         res.status(201).send(createdOwner); // Use 201 for resource creation
     });
 }
+
+router.get('/admin', function (req, res) {
+  let success =   req.flash("success")
+    res.render("createproducts",{success});
+});
 
 module.exports = router;
